@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Secrets
+.env
+.env.local
+.env*.local
+
+# Platform
+.vercel/
+
+# Editor and OS noise
+.vscode/
+.DS_Store
