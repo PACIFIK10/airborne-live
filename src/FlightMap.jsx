@@ -3,10 +3,9 @@ import { MapContainer, TileLayer, useMap, useMapEvents } from 'react-leaflet';
 import AircraftLayer from './AircraftLayer';
 
 // A muted basemap keeps the aircraft as the only saturated thing on screen.
-const TILES = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png';
-const LABELS = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png';
+const TILES = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const ATTRIBUTION =
-  '&copy; OpenStreetMap contributors &copy; CARTO &middot; aircraft data adsb.lol';
+  '&copy; OpenStreetMap contributors &middot; aircraft data adsb.lol';
 
 export default function FlightMap({
   centre,
@@ -28,7 +27,6 @@ export default function FlightMap({
       preferCanvas
     >
       <TileLayer url={TILES} attribution={ATTRIBUTION} />
-      <TileLayer url={LABELS} pane="shadowPane" />
       <BoundsReporter onBoundsChange={onBoundsChange} />
       <FollowAircraft flights={flights} followId={followId} />
       <AircraftLayer
