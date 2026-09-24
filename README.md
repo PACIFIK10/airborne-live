@@ -1,10 +1,16 @@
 # Airborne — live flight map
 
-A live map of aircraft currently in the air. React and Leaflet on the front,
-a single serverless function on the back, deployed on Vercel.
+**Live: [airborne-live.vercel.app](https://airborne-live.vercel.app)**
 
-Aircraft positions come from [adsb.lol](https://adsb.lol), a community ADS-B
-network. No account, no API keys, no environment variables.
+A live map of aircraft currently in the air. React and Leaflet on the front,
+a single serverless function on the back, deployed on Vercel. Positions come
+from [adsb.lol](https://adsb.lol), a community ADS-B network.
+
+Aircraft are projected forward between 12-second data refreshes, so they move
+continuously rather than jumping. Marker colour encodes altitude band; the
+selected aircraft shows its recent track.
+<img width="1918" height="995" alt="image" src="https://github.com/user-attachments/assets/9ab1b881-febc-4375-a9e9-ff415cda49b6" />
+
 
 ## Structure
 
