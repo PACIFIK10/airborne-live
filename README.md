@@ -42,10 +42,9 @@ runs both halves the way production does.
 
 ## Deploying
 
-1. Push this folder to a GitHub repository.
-2. At vercel.com, import the repo. Vercel detects Vite automatically — accept
-   the defaults.
-3. Deploy.
+Hosted on Vercel at [airborne-live.vercel.app](https://airborne-live.vercel.app).
+Every push to `main` redeploys automatically. There are no environment
+variables or API keys to configure.
 
 Every push to `main` redeploys automatically. There is nothing to configure
 afterwards.
