@@ -9,24 +9,8 @@ from [adsb.lol](https://adsb.lol), a community ADS-B network.
 Aircraft are projected forward between 12-second data refreshes, so they move
 continuously rather than jumping. Marker colour encodes altitude band; the
 selected aircraft shows its recent track.
-<img width="1918" height="995" alt="image" src="https://github.com/user-attachments/assets/9ab1b881-febc-4375-a9e9-ff415cda49b6" />
 
-
-## Structure
-
-```
-api/flights.js        serverless function — fetches, filters and caches positions
-src/
-  main.jsx            entry point
-  App.jsx             layout, search, flight strip list
-  FlightMap.jsx       map shell and bounds reporting
-  AircraftLayer.jsx   Leaflet markers: interpolation and trails
-  useFlights.js       polling and trail history
-  deadReckon.js       position projection maths
-  styles.css
-index.html
-vite.config.js
-```
+<img alt="Aircraft over the New York and Philadelphia corridor, coloured by altitude" src="https://github.com/user-attachments/assets/9ab1b881-febc-4375-a9e9-ff415cda49b6" />
 
 ## Running it locally
 
@@ -37,17 +21,10 @@ vercel dev
 ```
 
 Use `vercel dev`, not `npm run dev`. Plain `npm run dev` starts Vite only, so
-`/api/flights` returns 404 because nothing is serving the function. `vercel dev`
-runs both halves the way production does.
+`/api/flights` returns 404 because nothing is serving the function.
 
-## Deploying
-
-Hosted on Vercel at [airborne-live.vercel.app](https://airborne-live.vercel.app).
 Every push to `main` redeploys automatically. There are no environment
 variables or API keys to configure.
-
-Every push to `main` redeploys automatically. There is nothing to configure
-afterwards.
 
 ## Why not OpenSky
 
@@ -73,21 +50,11 @@ changed — nothing in `src/` knows or cares where positions come from.
   and ground speed. When a real position arrives, the difference between
   prediction and reality is faded to zero over 1.5 seconds, so aircraft slide
   into place instead of jumping.
-- Marker colour encodes altitude band; the sidebar arrow encodes climb or
-  descent.
 - Only the selected aircraft's trail is drawn. Drawing every trail costs a
   great deal and communicates little.
-
-## Reliability choices
-
-- Two upstream sources. If adsb.lol fails, the function tries adsb.one, which
-  returns the same response format.
-- Every upstream request has an 8-second timeout, so a stalled connection
-  produces a clear error instead of hanging until the platform kills it.
-- Responses are cached for 8 seconds in the function and at Vercel's edge, so
-  repeated views of the same area don't repeatedly hit the upstream API.
-- If polling fails, the map keeps the last positions and the sidebar says what
-  went wrong rather than silently emptying.
+- If a request fails the map keeps the last positions and says what went wrong
+  rather than silently emptying. Responses are cached for 8 seconds, and
+  adsb.one is tried as a fallback when adsb.lol is unreachable.
 
 ## Next steps
 
